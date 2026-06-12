@@ -2,14 +2,15 @@ from gpiozero import PWMOutputDevice, DigitalOutputDevice, PWMLED
 import smbus, struct
 from picamera2 import Picamera2
 import cv2
+from signal import pause
 
 class Robot:
     def __init__(self):
         # mot init
-        self.mot1a = PWMOutputDevice(12, frequency=200)
         self.mot1b = PWMOutputDevice(13, frequency=200)
-        self.mot2a = PWMOutputDevice(18, frequency=200)
+        self.mot1a = PWMOutputDevice(12, frequency=200)
         self.mot2b = PWMOutputDevice(19, frequency=200)
+        self.mot2a = PWMOutputDevice(18, frequency=200)
         self.mot1a.value = 0
         self.mot2b.value = 0
         self.mot1b.value = 0
@@ -56,43 +57,35 @@ class Robot:
             raw_data = self.bus.read_i2c_block_data(self.xiao_adress, 0, 4)
             byte_data = bytes(raw_data)
             vin = struct.unpack('<f', byte_data)[0]
-            return vin
+            return round(vin, 2)
         except Exception as e:
             print(f"error reading battery level : {e}")
             return None
 
     def mot(self, direction, pwm=1.0):
         print("[robot.py] direction:", str(direction), ", speed:", str(pwm))
+        self.mot1a.value = 0
+        self.mot2b.value = 0
+        self.mot1b.value = 0
+        self.mot2a.value = 0
         if direction == "forward":
             self.mot1a.value = pwm
             self.mot2b.value = pwm
-            self.mot1b.value = 0
-            self.mot2a.value = 0
         elif direction == "backward":
-            self.mot1a.value = 0
-            self.mot2b.value = 0
             self.mot1b.value = pwm
             self.mot2a.value = pwm
         elif direction == "turn_left":
-            self.mot1a.value = 0
             self.mot2b.value = pwm
             self.mot1b.value = pwm
-            self.mot2a.value = 0
         elif direction == "turn_right":
             self.mot1a.value = pwm
-            self.mot2b.value = 0
-            self.mot1b.value = 0
             self.mot2a.value = pwm
         elif direction == "alt_turn_left":
             self.mot1a.value = pwm / 2 
             self.mot2b.value = pwm
-            self.mot1b.value = 0
-            self.mot2a.value = 0
         elif direction == "alt_turn_right":
             self.mot1a.value = pwm 
             self.mot2b.value = pwm / 2
-            self.mot1b.value = 0
-            self.mot2a.value = 0
         elif direction == "stop":
             self.mot1a.value = 0 
             self.mot2b.value = 0
@@ -100,3 +93,5 @@ class Robot:
             self.mot2a.value = 0
         else: 
             pass
+
+        

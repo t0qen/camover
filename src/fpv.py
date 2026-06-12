@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 def start_fpv(robot):
     print("** fpv mode selected **")
-
+    print(robot.battery_level())
     @app.route('/video_feed')
     def video_feed():
         pass
@@ -27,14 +27,29 @@ def start_fpv(robot):
         return """
         <html>
             <body>
-                <h1>Flux vidéo du robot</h1>
+                <h1>~ camover ~</h1>
                 <img src="/video_feed" width="640" height="480">
                 <br>
-                <a href="/control/forward">Avancer</a>
-                <a href="/control/backward">Reculer</a>
-                <a href="/control/left">Gauche</a>
-                <a href="/control/right">Droite</a>
-                <a href="/control/stop">Stop</a>
+                <p>battery level : <span id="battery-level">loading...</span> V</p>
+                <button onclick="sendCommand('forward')">forward</button>
+                <button onclick="sendCommand('backward')">backward</button>
+                <button onclick="sendCommand('turn_left')">turn left</button>
+                <button onclick="sendCommand('turn_right')">turn right</button>
+                <button onclick="sendCommand('stop')">stop</button>
+
+                <script>
+                function sendCommand(direction) { // send command to motors without reloadingthe page
+                    fetch(`/control/${direction}`)
+                        .then(response => console.log(response.text()));// log
+                }
+                setInterval(function() { // refresh battery level every 2s
+                    fetch('/battery')
+                        .then(response => response.text())
+                        .then(level => {
+                            document.getElementById('battery-level').textContent = level;
+                        });
+                }, 2000);
+                </script>
             </body>
         </html>
         """
@@ -42,7 +57,13 @@ def start_fpv(robot):
     @app.route('/control/<direction>')
     def control(direction):
         robot.mot(direction, 0.5)
+        return "[fpv.py] command sent to motor"
+    
+    
+    @app.route('/battery')
+    def battery():
+        return str(robot.battery_level())  
         
     
-    app.run(host='0.0.0.0', port=8080, threaded=True, debug=True)
+    app.run(host='0.0.0.0', port=8080, threaded=True)
     print("[fpv.py] web server launched")
