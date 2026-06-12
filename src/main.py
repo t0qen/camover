@@ -1,9 +1,18 @@
-from bottle import route, run, template
-from datetime import datetime
-@route('/')
-def index(name='time'):
-    dt = datetime.now()
-    time = "{:%Y-%m-%d %H:%M:%S}".format(dt)
-    return template(' <head> <h1> Welcome to MechatronicsLab </h1> </head> <br>    '
-                    '<b> <h3> Raspberry Pi Thinks Today is : </h3>  <br> date/time : {{t}}</b>', t=time)
-run(host='localhost', port=8080)
+from robot import Robot
+from fpv import start_fpv
+from autonomous import start_autonomous
+
+robot = Robot()
+autonomous_mode = False
+
+print("| ROBOT CODE LAUNCHED |")
+print("")
+
+if not autonomous_mode:
+    start_fpv(robot)
+else: 
+    start_autonomous(robot)
+
+
+
+
