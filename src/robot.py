@@ -21,9 +21,12 @@ class Robot:
         self.xiao_adress = 0x08
         
         # camera
-        # self.camera = Picamera2()
-        # self.camera.configure(self.camera.create_video_configuration(width=640, height=480, format='XRGB8888'))
-        # self.camera.start()
+        self.camera = Picamera2()
+        camera_conf = self.camera.create_video_configuration(main={"size": (640, 480)})
+        self.camera.configure(camera_conf)
+        #self.camera.resolution(640, 480)
+        #self.camera.rotation(180)
+        self.camera.start()
         
         # others
         self.buzzer = PWMOutputDevice(23, frequency=200)
@@ -38,6 +41,7 @@ class Robot:
     def camera_frame(self):
         frame = self.camera.capture_array()
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+        frame = cv2.flip(frame, -1)
         return frame
 
     def bip(self, state, tone=0.5):
@@ -74,10 +78,10 @@ class Robot:
         elif direction == "backward":
             self.mot1b.value = pwm
             self.mot2a.value = pwm
-        elif direction == "turn_left":
+        elif direction == "turn_right":
             self.mot2b.value = pwm
             self.mot1b.value = pwm
-        elif direction == "turn_right":
+        elif direction == "turn_left":
             self.mot1a.value = pwm
             self.mot2a.value = pwm
         elif direction == "alt_turn_left":

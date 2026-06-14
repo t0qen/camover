@@ -1,16 +1,16 @@
-from flask import Flask
+from flask import Flask, Response
 from signal import pause
-
+import cv2 
 app = Flask(__name__)
 
 
-# def generate_frames():
-    # while True:
-        # frame = robot.get_camera_frame()
-        # ret, buffer = cv2.imencode('.jpg', frame)
-        # frame_bytes = buffer.tobytes()
-        # yield (b'--frame\r\n'
-            #    b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+def generate_frames(robot):
+    while True:
+        frame = robot.camera_frame()
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame_bytes = buffer.tobytes()
+        yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
 
 
 
@@ -19,8 +19,7 @@ def start_fpv(robot):
     print(robot.battery_level())
     @app.route('/video_feed')
     def video_feed():
-        pass
-        # return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+        return Response(generate_frames(robot), mimetype='multipart/x-mixed-replace; boundary=frame')
     
     @app.route('/')
     def index():
