@@ -12,7 +12,6 @@ def generate_frames(robot):
             b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
 
 
-
 def start_fpv(robot):
     print("** fpv mode selected **")
     print(robot.battery_level())
@@ -29,12 +28,9 @@ def start_fpv(robot):
         robot.mot(direction, 1)
         return "[fpv.py] command sent to motor"
     
-
-    
     @app.route('/battery')
     def battery():
         return str(robot.battery_level())  
-        
     
     app.run(host='0.0.0.0', port=8080, threaded=True)
     print("[fpv.py] web server launched")

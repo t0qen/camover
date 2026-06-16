@@ -1,6 +1,11 @@
 <!doctype html>
 <html>
+    <head>
+        <link rel="stylesheet" href="/static/style.css" />
+    </head>
+
     <body>
+        
         <h1>~ camover ~</h1>
         <img src="/video_feed" width="640" height="480">
         <br>
@@ -12,55 +17,7 @@
         <button onclick="send_command('turn_right')">turn right</button>
         <button onclick="send_command('stop')">stop</button>
 
-        <script>
-
-        // command
-        function send_command(direction) { // send command to motors without reloadingthe page
-            fetch(`/control/${direction}`)
-        }
-        
-
-        // battery refresh
-        setInterval(function() { // refresh battery level every 2s
-            fetch('/battery')
-                .then(response => response.text())
-                .then(level => {
-                    document.getElementById('battery-level').textContent = level;
-                });
-        }, 2000);
-
-        document.addEventListener('keydown', event => {
-            event.preventDefault();
-
-            switch(event.key) {
-                case 'w': 
-                    send_command('forward');
-                    break;
-                case 's':  
-                    send_command('backward');
-                    break;
-                case 'a':  
-                    send_command('turn_left');
-                    break;
-                case 'd': 
-                    send_command('turn_right');
-                    break;
-                case 'q':
-                    send_command('alt_turn_left');
-                    break;
-                case 'e':
-                    send_command('alt_turn_right')
-                    breaks;
-            }
-        });
-
-        document.addEventListener('keyup', event => {
-            event.preventDefault();
-            send_command('stop');
-        });
-
-
-        </script>
+        <script src="/static/app.js" charset="utf-8"></script>
 
     </body>
 </html>
