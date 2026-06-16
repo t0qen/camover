@@ -85,11 +85,11 @@ class Robot:
             self.mot1a.value = pwm
             self.mot2a.value = pwm
         elif direction == "alt_turn_left":
-            self.mot1a.value = pwm / 2 
-            self.mot2b.value = pwm
-        elif direction == "alt_turn_right":
             self.mot1a.value = pwm 
-            self.mot2b.value = pwm / 2
+            self.mot2b.value = pwm / 3
+        elif direction == "alt_turn_right":
+            self.mot1a.value = pwm / 3
+            self.mot2b.value = pwm
         elif direction == "stop":
             self.mot1a.value = 0 
             self.mot2b.value = 0

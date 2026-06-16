@@ -1,8 +1,7 @@
-from flask import Flask, Response
+from flask import Flask, Response, render_template, request
 from signal import pause
 import cv2 
 app = Flask(__name__)
-
 
 def generate_frames(robot):
     while True:
@@ -23,41 +22,14 @@ def start_fpv(robot):
     
     @app.route('/')
     def index():
-        return """
-        <html>
-            <body>
-                <h1>~ camover ~</h1>
-                <img src="/video_feed" width="640" height="480">
-                <br>
-                <p>battery level : <span id="battery-level">loading...</span> V</p>
-                <button onclick="sendCommand('forward')">forward</button>
-                <button onclick="sendCommand('backward')">backward</button>
-                <button onclick="sendCommand('turn_left')">turn left</button>
-                <button onclick="sendCommand('turn_right')">turn right</button>
-                <button onclick="sendCommand('stop')">stop</button>
-
-                <script>
-                function sendCommand(direction) { // send command to motors without reloadingthe page
-                    fetch(`/control/${direction}`)
-                        .then(response => console.log(response.text()));// log
-                }
-                setInterval(function() { // refresh battery level every 2s
-                    fetch('/battery')
-                        .then(response => response.text())
-                        .then(level => {
-                            document.getElementById('battery-level').textContent = level;
-                        });
-                }, 2000);
-                </script>
-            </body>
-        </html>
-        """
+        return render_template('index.html')
 
     @app.route('/control/<direction>')
     def control(direction):
-        robot.mot(direction, 0.5)
+        robot.mot(direction, 1)
         return "[fpv.py] command sent to motor"
     
+
     
     @app.route('/battery')
     def battery():
