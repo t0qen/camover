@@ -29,8 +29,9 @@ class Robot:
         self.camera.start()
         
         # others
-        self.buzzer = PWMOutputDevice(23, frequency=200)
+        self.buzzer = PWMOutputDevice(23, frequency=1000)
         self.red_led = PWMLED(24)
+        self.buzzer_state = False
 
     def raw_mot(self, m1a, m1b, m2a, m2b):
         self.mot1a.value = m1a
@@ -55,6 +56,18 @@ class Robot:
             self.red_led.value = pwm
         else: 
             self.red_led.value = 0
+
+    def toggle_buzzer(self, tone=0.9):
+        if self.buzzer_state:
+            self.buzzer.value = 0
+            self.buzzer_state = False
+        else:
+            self.buzzer.value = tone
+            self.buzzer_state = True
+        
+
+        
+
 
     def battery_level(self):
         try:

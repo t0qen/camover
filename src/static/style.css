@@ -1,0 +1,14 @@
+/* .stream-container { */
+    /* container */
+/* } */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons1 {
+    display: flex;
+    flex-direction: row-reverse;
+}

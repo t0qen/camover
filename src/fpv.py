@@ -1,7 +1,10 @@
 from flask import Flask, Response, render_template, request
 from signal import pause
 import cv2 
+import time
 app = Flask(__name__)
+
+
 
 def generate_frames(robot):
     while True:
@@ -14,6 +17,7 @@ def generate_frames(robot):
 
 def start_fpv(robot):
     print("** fpv mode selected **")
+    robot.red_led.on()
     print(robot.battery_level())
     @app.route('/video_feed')
     def video_feed():
@@ -31,6 +35,11 @@ def start_fpv(robot):
     @app.route('/battery')
     def battery():
         return str(robot.battery_level())  
+
+    @app.route('/buzzer')
+    def buzzer():
+        robot.toggle_buzzer()
+        return "[fpv.py] command sent to buzzer"
     
     app.run(host='0.0.0.0', port=8080, threaded=True)
     print("[fpv.py] web server launched")

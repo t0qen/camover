@@ -7,17 +7,59 @@
     <body>
         
         <h1>~ camover ~</h1>
-        <img src="/video_feed" width="640" height="480">
-        <br>
         <p>battery level : <span id="battery-level">loading...</span> V</p>
-
-        <button onclick="send_command('forward')">forward</button>
-        <button onclick="send_command('backward')">backward</button>
-        <button onclick="send_command('turn_left')">turn left</button>
-        <button onclick="send_command('turn_right')">turn right</button>
-        <button onclick="send_command('stop')">stop</button>
+        <div class="container">
+            <img src="/video_feed" width="640" height="480">
+        </div>
+        
+        <br>
+        
+        <div class="buttons1">
+            <button onmousedown="button['fast_turn_left'] = true" onmouseup="button['fast_turn_left'] = false">
+                fast turn left</button>
+            <button onmousedown="button['turn_right'] = true" onmouseup="button['turn_right'] = false">
+                turn right</button>
+            <button onmousedown="button['forward'] = true" onmouseup="button['forward'] = false">
+                forward</button>
+            <button onmousedown="button['turn_left'] = true" onmouseup="button['turn_left'] = false">
+                turn left</button>
+            <button onmousedown="button['fast_turn_right'] = true" onmouseup="button['fast_turn_right'] = false">
+                fast turn right</button>
+        </div>
+        
+        <br>
+        <button onmousedown="button['backward'] = true" onmouseup="button['backward'] = false">
+            backward</button>
+        <button onmousedown="button['buzzer'] = true" onmouseup="button['buzzer'] = false">
+            buzzer</button>
+        
 
         <script src="/static/app.js" charset="utf-8"></script>
 
     </body>
 </html>
+
+<!-- <!DOCTYPE html>
+<html>
+<body>
+<h1>HTML DOM Events</h1>
+<h2>The onmousedown Event</h2>
+
+<p>Clock the text below!</p>
+<p id="myP" onmousedown="mouseDown()" onmouseup="mouseUp()">
+The mouseDown() function sets the color of this text to red.
+The mouseUp() function sets the color of this text to blue.
+</p>
+
+<script>
+function mouseDown() {
+  document.getElementById("myP").style.color = "red";
+}
+
+function mouseUp() {
+  document.getElementById("myP").style.color = "blue";
+}
+</script>
+
+</body>
+</html> -->
