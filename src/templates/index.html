@@ -2,36 +2,47 @@
 <html>
     <head>
         <link rel="stylesheet" href="/static/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
         
-        <h1>~ camover ~</h1>
-        <p>battery level : <span id="battery-level">loading...</span> V</p>
-        <div class="container">
+        <!-- <p class="title">~ camover ~</p> -->
+        
+        <div class="stream">
             <img src="/video_feed" width="640" height="480">
         </div>
         
-        <br>
-        
-        <div class="buttons1">
-            <button onmousedown="button['fast_turn_left'] = true" onmouseup="button['fast_turn_left'] = false">
-                fast turn left</button>
-            <button onmousedown="button['turn_right'] = true" onmouseup="button['turn_right'] = false">
-                turn right</button>
-            <button onmousedown="button['forward'] = true" onmouseup="button['forward'] = false">
-                forward</button>
-            <button onmousedown="button['turn_left'] = true" onmouseup="button['turn_left'] = false">
-                turn left</button>
-            <button onmousedown="button['fast_turn_right'] = true" onmouseup="button['fast_turn_right'] = false">
-                fast turn right</button>
+
+        <div class="global_actions">
+            <p id="battery-indicator">battery level : <span id="battery-level">loading...</span> V</p>
+            <div class="buttons1">
+                <button onmousedown="button['fast_turn_right'] = true" onmouseup="button['fast_turn_right'] = false"
+                    ontouchstart="button['fast_turn_right'] = true" ontouchend="button['fast_turn_right'] = false" >
+                    fast turn right</button>
+                <button onmousedown="button['turn_right'] = true" onmouseup="button['turn_right'] = false"
+                    ontouchstart="button['turn_right'] = true" ontouchend="button['turn_right'] = false" >
+                    turn right</button>
+                <button onmousedown="button['forward'] = true" onmouseup="button['forward'] = false"
+                    ontouchstart="button['forward'] = true" ontouchend="button['forward'] = false" >
+                    forward</button>
+                <button onmousedown="button['turn_left'] = true" onmouseup="button['turn_left'] = false"
+                    ontouchstart="button['turn_left'] = true" ontouchend="button['turn_left'] = false" >
+                    turn left</button>
+                <button onmousedown="button['fast_turn_left'] = true" onmouseup="button['fast_turn_left'] = false"
+                    ontouchstart="button['fast_turn_left'] = true" ontouchend="button['fast_turn_left'] = false" >
+                    fast turn left</button>
+            </div>
+            
+            <div class="buttons2">
+                <button onmousedown="button['backward'] = true" onmouseup="button['backward'] = false"
+                    ontouchstart="button['backward'] = true" ontouchend="button['backward'] = false" >
+                    backward</button>
+                <button onmousedown="button['buzzer'] = true" onmouseup="button['buzzer'] = false"
+                    ontouchstart="button['buzzer'] = true" ontouchend="button['buzzer'] = false" >
+                    buzzer</button>
+            </div>    
         </div>
-        
-        <br>
-        <button onmousedown="button['backward'] = true" onmouseup="button['backward'] = false">
-            backward</button>
-        <button onmousedown="button['buzzer'] = true" onmouseup="button['buzzer'] = false">
-            buzzer</button>
         
 
         <script src="/static/app.js" charset="utf-8"></script>

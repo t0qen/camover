@@ -14,7 +14,7 @@ setInterval(function() {
         .then(level => {
             document.getElementById('battery-level').textContent = level;
         });
-}, 2000);
+}, 5000);
 
 function main() {
     console.log(keys);
