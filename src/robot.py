@@ -2,6 +2,8 @@ from gpiozero import PWMOutputDevice, DigitalOutputDevice, PWMLED
 import smbus, struct
 from picamera2 import Picamera2
 import cv2
+import time
+from threading import Thread
 from signal import pause
 
 class Robot:
@@ -24,9 +26,12 @@ class Robot:
         self.camera = Picamera2()
         camera_conf = self.camera.create_video_configuration(main={"size": (640, 480)})
         self.camera.configure(camera_conf)
-        #self.camera.resolution(640, 480)
-        #self.camera.rotation(180)
         self.camera.start()
+
+        self.latest_frame = None
+        self.camera_running = True
+        self.camera_thread = Thread(target=self._camera_loop,daemon=True)
+        self.camera_thread.start()
         
         # others
         self.buzzer = PWMOutputDevice(23, frequency=1000)
@@ -39,11 +44,19 @@ class Robot:
         self.mot2a.value = m2a
         self.mot2b.value = m2b
         
+    def _camera_loop(self):
+        while self.camera_running:
+            frame = self.camera.capture_array()
+            frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+            frame = cv2.flip(frame, -1)
+            # skip encode si dernière frame pas consommée
+            ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 70])
+            if ret:
+                self.latest_frame = buffer.tobytes()
+            time.sleep(0.03)
+
     def camera_frame(self):
-        frame = self.camera.capture_array()
-        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-        frame = cv2.flip(frame, -1)
-        return frame
+        return self.latest_frame         
 
     def bip(self, state, tone=0.5):
         if state:
@@ -51,7 +64,7 @@ class Robot:
         else: 
             self.buzzer.value = 0
 
-    def red_led(self, state, pwm=1.0):
+    def set_red_led(self, state, pwm=1.0):
         if state:
             self.red_led.value = pwm
         else: 
@@ -64,10 +77,6 @@ class Robot:
         else:
             self.buzzer.value = tone
             self.buzzer_state = True
-        
-
-        
-
 
     def battery_level(self):
         try:
