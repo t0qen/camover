@@ -1,10 +1,20 @@
 from flask import Flask, Response, render_template, request
 from signal import pause
+# from threading import Thread
+# import os
 import cv2 
 import time
 app = Flask(__name__)
 
+# def bg_loop(robot):
+#     while True:
+#         bat_volt = robot.battery_level()
 
+#         if bat_volt < 10.5:
+#             print(f"[fpv.py, bg_loop] critical battery level : {bat_volt}")
+#             os.system('shutdown -h now')
+
+#         time.sleep(1)
 
 def generate_frames(robot):
     while True:
@@ -17,6 +27,7 @@ def generate_frames(robot):
 
 def start_fpv(robot):
     print("** fpv mode selected **")
+    #thread = Thread(target=bg_loop,args=(robot,),daemon=True).start()
     robot.red_led.on()
     print(robot.battery_level())
     @app.route('/video_feed')
