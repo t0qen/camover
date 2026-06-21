@@ -28,14 +28,15 @@ class Robot:
         self.camera.configure(camera_conf)
         self.camera.start()
 
-        self.latest_frame = None
-        self.camera_running = True
-        self.camera_thread = Thread(target=self._camera_loop,daemon=True)
-        self.camera_thread.start()
+        # self.latest_frame = None
+        # self.camera_running = True
+        # self.camera_thread = Thread(target=self._camera_loop,daemon=True)
+        # self.camera_thread.start()
         
         # others
         self.buzzer = PWMOutputDevice(23, frequency=1000)
         self.red_led = PWMLED(24)
+    
         self.buzzer_state = False
 
     def raw_mot(self, m1a, m1b, m2a, m2b):
@@ -44,19 +45,22 @@ class Robot:
         self.mot2a.value = m2a
         self.mot2b.value = m2b
         
-    def _camera_loop(self):
-        while self.camera_running:
-            frame = self.camera.capture_array()
-            frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-            frame = cv2.flip(frame, -1)
-            # skip encode si dernière frame pas consommée
-            ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 70])
-            if ret:
-                self.latest_frame = buffer.tobytes()
-            time.sleep(0.03)
+    # def _camera_loop(self):
+    #     while self.camera_running:
+    #         frame = self.camera.capture_array()
+    #         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+    #         frame = cv2.flip(frame, -1)
+    #         # skip encode si dernière frame pas consommée
+    #         ret, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 70])
+    #         if ret:
+    #             self.latest_frame = buffer.tobytes()
+    #         time.sleep(0.03)
 
     def camera_frame(self):
-        return self.latest_frame         
+        frame = self.camera.capture_array()
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+        frame = cv2.flip(frame, -1)
+        return frame       
 
     def bip(self, state, tone=0.5):
         if state:

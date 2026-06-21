@@ -1,5 +1,6 @@
 let keys = {};
 let button = {};
+let current_button = "";
 let last_command = "";
 let last_buzzer_state = false;
 
