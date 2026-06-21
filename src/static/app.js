@@ -8,6 +8,9 @@ document.addEventListener("keydown", keyDownHandler);
 document.addEventListener("keyup", keyUpHandler);
 setInterval(main, 100);
 
+
+
+
 // battery refresh
 setInterval(function() {
     fetch('/battery')
@@ -53,6 +56,7 @@ function send_command(command) {
     }
 }
 
+
 function keyDownHandler(e) {
     keys[e.key] = true;
 }
@@ -60,3 +64,113 @@ function keyDownHandler(e) {
 function keyUpHandler(e) {
     keys[e.key] = false;
 }
+
+
+
+// mobile part
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+});
+window.addEventListener("blur", () => {
+    for (const key in button) {
+        button[key] = false;
+    }
+});
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        for (const key in button) {
+            button[key] = false;
+        }
+    }
+});
+
+// mobile inputs (longgggg)
+document.getElementById("forward").addEventListener("pointerdown", () => {
+    button["forward"] = true;
+});
+
+document.getElementById("forward").addEventListener("pointerup", () => {
+    button["forward"] = false;
+});
+
+document.getElementById("forward").addEventListener("pointercancel", () => {
+    button["forward"] = false;
+});
+
+
+document.getElementById("turn_left").addEventListener("pointerdown", () => {
+    button["turn_left"] = true;
+});
+
+document.getElementById("turn_left").addEventListener("pointerup", () => {
+    button["turn_left"] = false;
+});
+
+document.getElementById("turn_left").addEventListener("pointercancel", () => {
+    button["turn_left"] = false;
+});
+
+
+document.getElementById("turn_right").addEventListener("pointerdown", () => {
+    button["turn_right"] = true;
+});
+
+document.getElementById("turn_right").addEventListener("pointerup", () => {
+    button["turn_right"] = false;
+});
+
+document.getElementById("turn_right").addEventListener("pointercancel", () => {
+    button["turn_right"] = false;
+});
+
+
+document.getElementById("fast_turn_left").addEventListener("pointerdown", () => {
+    button["fast_turn_left"] = true;
+});
+
+document.getElementById("fast_turn_left").addEventListener("pointerup", () => {
+    button["fast_turn_left"] = false;
+});
+
+document.getElementById("fast_turn_left").addEventListener("pointercancel", () => {
+    button["fast_turn_left"] = false;
+});
+
+
+document.getElementById("fast_turn_right").addEventListener("pointerdown", () => {
+    button["fast_turn_right"] = true;
+});
+
+document.getElementById("fast_turn_right").addEventListener("pointerup", () => {
+    button["fast_turn_right"] = false;
+});
+
+document.getElementById("fast_turn_right").addEventListener("pointercancel", () => {
+    button["fast_turn_right"] = false;
+});
+
+
+document.getElementById("backward").addEventListener("pointerdown", () => {
+    button["backward"] = true;
+});
+
+document.getElementById("backward").addEventListener("pointerup", () => {
+    button["backward"] = false;
+});
+
+document.getElementById("backward").addEventListener("pointercancel", () => {
+    button["backward"] = false;
+});
+
+
+document.getElementById("buzzer").addEventListener("pointerdown", () => {
+    button["buzzer"] = true;
+});
+
+document.getElementById("buzzer").addEventListener("pointerup", () => {
+    button["buzzer"] = false;
+});
+
+document.getElementById("buzzer").addEventListener("pointercancel", () => {
+    button["buzzer"] = false;
+});
