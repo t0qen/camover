@@ -1,12 +1,11 @@
 from flask import Flask, Response, render_template, request
 from signal import pause
 from threading import Thread
+from ntfy import send_notif
 
 import cv2 
 import time
 app = Flask(__name__)
-
-
 
 def generate_frames(robot):
     while True:
@@ -19,7 +18,7 @@ def generate_frames(robot):
 
 def start_fpv(robot):
     print("** fpv mode selected **")
-    #
+    send_notif("fpv.py launched", "visit the website to control the robot", "default", "white_check_mark")
     robot.red_led.on()
     print(robot.battery_level())
     @app.route('/video_feed')
@@ -28,6 +27,8 @@ def start_fpv(robot):
     
     @app.route('/')
     def index():
+        real_ip = request.headers.get("CF-Connecting-IP")
+        print("Real IP:", real_ip)
         return render_template('index.html')
 
     @app.route('/control/<direction>')
