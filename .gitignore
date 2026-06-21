@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+src/.Trash-1000
 # C extensions
 *.so
 
