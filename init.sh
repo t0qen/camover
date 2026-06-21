@@ -9,11 +9,11 @@ echo
 
 echo "1) start the robot"
 echo
-echo "(waiting 2s for xiao turns on)"
+echo "(waiting 10s for xiao turns on)"
 
 for i in {1..10}; do
     printf "#"
-    sleep 0.2
+    sleep 1
 done
 echo
 echo
