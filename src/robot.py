@@ -24,7 +24,7 @@ class Robot:
         
         # camera
         self.camera = Picamera2()
-        camera_conf = self.camera.create_video_configuration(main={"size": (640, 480)})
+        camera_conf = self.camera.create_video_configuration(main={"size": (480, 320)})
         self.camera.configure(camera_conf)
         self.camera.start()
 

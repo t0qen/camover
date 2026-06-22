@@ -10,24 +10,28 @@
         <!-- <p class="title">~ camover ~</p> -->
         
         <div class="stream">
-            <img src="/video_feed" width="640" height="480">
+            <img src="/video_feed">
         </div>
         
 
         <div class="global_actions">
-            <p id="battery-indicator">battery level : <span id="battery-level">loading...</span> V</p>
-            <div class="buttons1">
-                <button id="fast_turn_right">fast turn right</button> 
-                <button id="turn_right">turn right</button>
-                <button id="forward">forward</button>          
-                <button id="turn_left">turn left</button>
-                <button id="fast_turn_left">fast turn left</button>
-                             
-            </div>                
-            <div class="buttons2">
-                <button id="backward">backward</button>
-                <button id="buzzer">buzzer</button>
-            </div>    
+            <span id="battery-level">loading...</span>
+            <div class="buttons">
+                <div class="buttons-right">
+                    <button id="fast_turn_right">fast turn right</button> 
+                    <button id="turn_right">turn right</button>
+                </div> 
+                <div class="buttons-center">
+                    <button id="backward">backward</button>
+                    <button id="forward">forward</button>       
+                    <button id="buzzer">buzzer</button>   
+                </div>
+                <div class="buttons-left">
+                    <button id="turn_left">turn left</button>
+                    <button id="fast_turn_left">fast turn left</button>
+                </div>                
+            </div>                   
+
         </div>
         
 

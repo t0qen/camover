@@ -34,24 +34,52 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    pointer-events: none;
 } 
 
+.global_actions * {
+    pointer-events: auto;
+}
 
-.buttons1 {
+.buttons {
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    gap: 8px;
     
 } 
 
-.buttons2 {
+.buttons-right {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
 }
+
+.buttons-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+}
+
+.buttons-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+
 
 button {
     background-color: #f6f5f4;
@@ -66,5 +94,20 @@ button {
     user-select: none;
         -webkit-user-select: none;
         -webkit-touch-callout: none;
-    touch-action: none;
+    touch-action: none; 
 }
+
+.stream {
+    width: 100vw;
+    position: fixed;
+    inset: 0;
+}
+
+.stream img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
