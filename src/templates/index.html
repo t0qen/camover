@@ -2,7 +2,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="/static/style.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="/static/manifest.json">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
     </head>
 
     <body>
@@ -15,20 +16,24 @@
         
 
         <div class="global_actions">
-            <span id="battery-level">loading...</span>
+            <div class="header">
+                <span id="battery-level">loading...</span>
+                <button class="button2" id="fullscreen">fullscreen</button>
+            </div>
             <div class="buttons">
                 <div class="buttons-right">
-                    <button id="fast_turn_right">fast turn right</button> 
-                    <button id="turn_right">turn right</button>
+                    <button class="button" id="fast_turn_right">fast turn right</button> 
+                    <button class="button" id="turn_right">turn right</button>
                 </div> 
                 <div class="buttons-center">
-                    <button id="backward">backward</button>
-                    <button id="forward">forward</button>       
-                    <button id="buzzer">buzzer</button>   
+                    <button class="button" id="backward">backward</button>
+                    <button class="button" id="forward">forward</button>       
+                    <button class="button" id="buzzer">buzzer</button>   
                 </div>
                 <div class="buttons-left">
-                    <button id="turn_left">turn left</button>
-                    <button id="fast_turn_left">fast turn left</button>
+                    
+                    <button class="button" id="fast_turn_left">fast turn left</button>
+                    <button class="button" id="turn_left">turn left</button>
                 </div>                
             </div>                   
 

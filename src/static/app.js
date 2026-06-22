@@ -3,11 +3,11 @@ let button = {};
 let current_button = "";
 let last_command = "";
 let last_buzzer_state = false;
-
+let is_fullscreen = false 
 document.addEventListener("keydown", keyDownHandler);
 document.addEventListener("keyup", keyUpHandler);
 setInterval(main, 100);
-
+document.documentElement.requestFullscreen();
 
 
 
@@ -82,6 +82,20 @@ document.addEventListener("visibilitychange", () => {
             button[key] = false;
         }
     }
+});
+
+document.getElementById("fullscreen").addEventListener("click", () => {
+    if (is_fullscreen) {
+        document.exitFullscreen();
+    } else {
+        document.documentElement.requestFullscreen();
+        try {
+            screen.orientation.lock("landscape");
+        } catch (err) {
+            console.log("Orientation lock non supporté");
+        }
+    }
+    is_fullscreen = !is_fullscreen
 });
 
 // mobile inputs (longgggg)
