@@ -1,20 +1,39 @@
-/* .stream-container { */
-    /* container */
-/* } */
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: monospace;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
+@font-face {
+    font-family: "Tiny5";
+    src: url("/static/fonts/pixel.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Pixgamer";
+    src: url("/static/fonts/pixgamer.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Pixel3";
+    src: url("/static/fonts/pixel3.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Pixel4";
+    src: url("/static/fonts/pixel4.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Minecraft";
+    src: url("/static/fonts/minecraft.otf") format("opentype");
+    font-display: swap;
 }
 
-/* .stream {
-    width: 100vw;    
-} */
+body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    font-family: monospace;
+}
 
 .header {
 
@@ -27,7 +46,19 @@ body {
 }
 
 #battery-level {
-    font-size: 4rem;
+    font-family: "Pixel4", monospace;
+    /* -webkit-text-stroke: 2px black; */
+    letter-spacing: 0.05em; 
+    text-shadow:
+        -0.05em -0.05em 0 #000,
+        0.05em -0.05em 0 #000,
+        -0.05em  0.05em 0 #000,
+        0.05em  0.05em 0 #000,
+        -0.05em  0      0 #000,
+        0.05em  0      0 #000,
+        0      -0.05em 0 #000,
+        0       0.05em 0 #000;
+    font-size: clamp(3rem, 10vw, 10rem);
     color: white;
 }
 
@@ -36,102 +67,126 @@ body {
     font-weight: bold;
 }
 
+.button {
+    background: none;
+    border: none;
+    user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+    touch-action: none; 
+    padding: 0;
+    margin: 0;
+
+}
+.button2 {
+    background-color: white;
+    color: #000000;
+    padding: 4px 4px;
+    border-radius: 0px;
+    font-size: clamp(0.5rem, 2vw, 2rem);
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+    touch-action: none; 
+    font-family: "Minecraft", monospace;
+    /* text-shadow:
+        -0.05em -0.05em 0 #000,
+        0.05em -0.05em 0 #000,
+        -0.05em  0.05em 0 #000,
+        0.05em  0.05em 0 #000,
+        -0.05em  0      0 #000,
+        0.05em  0      0 #000,
+        0      -0.05em 0 #000,
+        0       0.05em 0 #000; */
+}
+
+
+.stream {
+    position: relative;
+    height: 100vh;
+}
+
+#stream-id {
+    display: block;
+    height: 100%;
+    width: auto;
+}
+
+.button-img {
+    image-rendering: pixelated;
+    display: block;
+    width: clamp(48px, 8vw, 128px);
+    height: clamp(48px, 8vw, 128px);
+}
+.button:active img {
+    transform: scale(0.99);
+}
+
+/* 
+global_actions
+        .button2
+    .buttons-bottom
+        .buttons-turn
+        .buttons-fast-turn       .buttons-main
+*/
+
 
 .global_actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: fixed;
+    position: absolute;
     inset: 0;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     padding: 20px;
     box-sizing: border-box;
-
     pointer-events: none;
-} 
+}
+
+
 
 .global_actions * {
     pointer-events: auto;
 }
 
-.buttons {
+.buttons-bottom {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
     gap: 24px;
 } 
 
-.buttons-right {
+.button-rot {
+   display: flex; 
+   flex-direction: column-reverse;
+   gap: 12px;
+}
+.buttons-turn {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: flex-start;
     gap: 12px;
 }
 
-.buttons-center {
+.buttons-fast-turn  {
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 12px;
 }
 
-.buttons-left {
+.buttons-main {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 12px;
 }
 
-
-
-.button {
-    background-color: #f6f5f4;
-    color: #000000;
-    padding: 5px 5px;
-    border-radius: 20px;
-    font-size: 2rem;
-    border: none;
-    box-shadow: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-    touch-action: none; 
+#fullscreen {
+    padding-left: 20px;
+    padding-top: 20px;
 }
-.button2 {
-    background-color: #f6f5f4;
-    color: #000000;
-    padding: 5px 5px;
-    border-radius: 10px;
-    font-size: 1rem;
-    border: none;
-    box-shadow: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    user-select: none;
-        -webkit-user-select: none;
-        -webkit-touch-callout: none;
-    touch-action: none; 
-}
-
-
-.stream {
-    width: 100vw;
-    position: fixed;
-    inset: 0;
-}
-
-.stream img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
-

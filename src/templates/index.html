@@ -11,61 +11,53 @@
         <!-- <p class="title">~ camover ~</p> -->
         
         <div class="stream">
-            <img src="/video_feed">
-        </div>
-        
-
-        <div class="global_actions">
-            <div class="header">
-                <span id="battery-level">loading...</span>
-                <button class="button2" id="fullscreen">fullscreen</button>
-            </div>
-            <div class="buttons">
-                <div class="buttons-right">
-                    <button class="button" id="fast_turn_right">fast turn right</button> 
-                    <button class="button" id="turn_right">turn right</button>
-                </div> 
-                <div class="buttons-center">
-                    <button class="button" id="backward">backward</button>
-                    <button class="button" id="forward">forward</button>       
-                    <button class="button" id="buzzer">buzzer</button>   
+            <img id="stream-id" src="/video_feed">
+            <div class="global_actions">
+                <div class="header">
+                    <span id="battery-level">loading...</span>
+                    <button class="button" id="fullscreen">
+                        <img class="button-img" src="/static/data/fullscreen2.png">
+                    </button>
                 </div>
-                <div class="buttons-left">
-                    
-                    <button class="button" id="fast_turn_left">fast turn left</button>
-                    <button class="button" id="turn_left">turn left</button>
-                </div>                
-            </div>                   
+                <div class="buttons-bottom">
+                    <div class="button-rot">
+                        <div class="buttons-turn">
+                            <button class="button" id="turn_left">
+                                <img class="button-img" src="/static/data/turn_left.png">
+                            </button>
+                            <button class="button" id="turn_right">
+                                <img class="button-img" src="/static/data/turn_right.png">
+                            </button>
+                        </div>
+                        <div class="buttons-fast-turn">
+                            <button class="button" id="fast_turn_left">
+                                <img class="button-img" src="/static/data/fast_turn_left.png">
+                            </button>
+                            <button class="button" id="fast_turn_right">
+                                <img class="button-img" src="/static/data/fast_turn_right.png">
+                            </button> 
+                        </div>
+                    </div>
+                    <div class="buttons-main">
+                        <button class="button" id="buzzer">
+                            <img class="button-img" src="/static/data/buzzer.png">
+                        </button>   
+                        <button class="button" id="backward">
+                            <img class="button-img" src="/static/data/backward.png">
+                        </button>
+                        <button class="button" id="forward">
+                            <img class="button-img" src="/static/data/forward.png">
+                        </button>  
+                    </div>
+              
+                </div>                   
+
+            </div>
 
         </div>
-        
 
         <script src="/static/app.js" charset="utf-8"></script>
 
     </body>
 </html>
 
-<!-- <!DOCTYPE html>
-<html>
-<body>
-<h1>HTML DOM Events</h1>
-<h2>The onmousedown Event</h2>
-
-<p>Clock the text below!</p>
-<p id="myP" onmousedown="mouseDown()" onmouseup="mouseUp()">
-The mouseDown() function sets the color of this text to red.
-The mouseUp() function sets the color of this text to blue.
-</p>
-
-<script>
-function mouseDown() {
-  document.getElementById("myP").style.color = "red";
-}
-
-function mouseUp() {
-  document.getElementById("myP").style.color = "blue";
-}
-</script>
-
-</body>
-</html> -->

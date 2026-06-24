@@ -27,8 +27,6 @@ def start_fpv(robot):
     
     @app.route('/')
     def index():
-        real_ip = request.headers.get("CF-Connecting-IP")
-        print("Real IP:", real_ip)
         return render_template('index.html')
 
     @app.route('/control/<direction>')
