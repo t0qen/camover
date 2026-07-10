@@ -43,5 +43,11 @@ def start_fpv(robot):
         robot.toggle_buzzer()
         return "[fpv.py] command sent to buzzer"
     
+    @app.route("/cpu_temp")
+    def cpu_temp():
+        with open("/sys/class/thermal/thermal_zone0/temp") as f:
+            temp = int(f.read()) / 1000
+        return str(round(temp))
+    
     app.run(host='0.0.0.0', port=8080, threaded=True)
     print("[fpv.py] web server launched")

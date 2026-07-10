@@ -16,9 +16,16 @@ setInterval(function() {
     fetch('/battery')
         .then(response => response.text())
         .then(level => {
-            document.getElementById('battery-level').textContent = level;
+            document.getElementById('battery-level').textContent = `${level}V`;
         });
 }, 5000);
+setInterval(() => {
+    fetch('/cpu_temp')
+        .then(response => response.text())
+        .then(temp => {
+            document.getElementById('cpu-temp').textContent = `${temp}°C`;
+        });
+}, 2000);
 
 function main() {
     console.log(keys);

@@ -45,7 +45,7 @@ body {
     gap: 8px;
 }
 
-#battery-level {
+.text1 {
     font-family: "Pixel4", monospace;
     /* -webkit-text-stroke: 2px black; */
     letter-spacing: 0.05em; 
@@ -58,8 +58,19 @@ body {
         0.05em  0      0 #000,
         0      -0.05em 0 #000,
         0       0.05em 0 #000;
-    font-size: clamp(3rem, 10vw, 10rem);
+    font-size: clamp(4rem, 15vh, 10rem);
     color: white;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+#cpu-temp {
+    font-size: clamp(3rem, 10vh, 8rem);
+    /* padding-left: 20px; */
 }
 
 .title {

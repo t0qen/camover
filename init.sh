@@ -27,7 +27,7 @@ fi
 
 echo
 echo "- switch relay thought home assistant"
-http_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhN2E4ZmM5Y2E4NDQ0M2I5YTg1MzFiMzhkOTk1NGU5OCIsImlhdCI6MTc4MTk3NTU3MSwiZXhwIjoyMDk3MzM1NTcxfQ.hYHe9X5drH7PH0W4smQ3SaFfJ-6OYVScBuh14ey5Jxo" -H "Content-Type: application/json" -d '{"entity_id":"switch.camover_s_pi"}' "http://192.168.1.23:8123/api/services/switch/turn_on")
+http_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIxNDRiNTNjOTg1ZDk0NmRiYmU3YzdmNGI5ZTE4NDFjOSIsImlhdCI6MTc4MzUxNzk3MiwiZXhwIjoyMDk4ODc3OTcyfQ.23IBljg5SJrA7yC9ZMiarYu1uVtOvY8_OC9dG_mZ1zA" -H "Content-Type: application/json" -d '{"entity_id":"switch.camover_s_pi"}' "http://192.168.1.23:8123/api/services/switch/turn_on")
 
 if [ "$http_code" = "200" ]; then
     echo "request ok"
@@ -57,12 +57,12 @@ echo
 echo "2) setup developpement environnement"
 echo
 echo "- mount pi storage to pc"
-sshfs pi@192.168.1.37:/home/pi/camover /media/aymeric/PROJECTS/camover/src &
+sshfs pi@192.168.1.37:/home/pi/camover /media/dev/PROJECTS/camover/src &
 echo
-echo "- open folder in vscode"
-code /media/aymeric/PROJECTS/camover &
-echo
-ssh pi@192.168.1.37 &
+# echo "- open folder in vscode"
+# code /media/aymeric/PROJECTS/camover &
+# echo
+# ssh pi@192.168.1.37 &
 
 
 
