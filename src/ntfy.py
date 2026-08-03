@@ -4,7 +4,7 @@ import requests
 
 def send_notif(title, data, priority, tags):
     try:
-        requests.post("http://192.168.1.23:8061/camover-pi",
+        requests.post("http://192.168.1.31:8075/camover-pi",
             data= data,
             headers={
                 "Title": title,

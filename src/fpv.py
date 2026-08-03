@@ -2,10 +2,12 @@ from flask import Flask, Response, render_template, request
 from signal import pause
 from threading import Thread
 from ntfy import send_notif
-
 import cv2 
 import time
+
 app = Flask(__name__)
+
+current_speed = 1
 
 def generate_frames(robot):
     while True:
@@ -31,9 +33,16 @@ def start_fpv(robot):
 
     @app.route('/control/<direction>')
     def control(direction):
-        robot.mot(direction, 1)
+        robot.mot(direction, current_speed)
         return "[fpv.py] command sent to motor"
-    
+
+    @app.route('/speed/<speed>')
+    def speed(speed):
+        global current_speed
+        current_speed = float(speed)
+        print(f"[fpv.py] global speed : {current_speed}")
+        return f"[fpv.py] global speed : {current_speed}"
+
     @app.route('/battery')
     def battery():
         return str(robot.battery_level())  

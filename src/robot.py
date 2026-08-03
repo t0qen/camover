@@ -27,12 +27,12 @@ class Robot:
         camera_conf = self.camera.create_video_configuration(main={"size": (480, 320)})
         self.camera.configure(camera_conf)
         self.camera.start()
+        self.camera.set_controls({
+            "AeEnable": False,
+            "ExposureTime": 3000,   # 3 ms
+            "AnalogueGain": 6.0
+        })
 
-        # self.latest_frame = None
-        # self.camera_running = True
-        # self.camera_thread = Thread(target=self._camera_loop,daemon=True)
-        # self.camera_thread.start()
-        
         # others
         self.buzzer = PWMOutputDevice(23, frequency=1000)
         self.red_led = PWMLED(24)

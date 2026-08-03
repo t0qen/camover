@@ -1,66 +1,79 @@
 <!doctype html>
 <html>
-    <head>
-        <link rel="stylesheet" href="/static/style.css" />
-        <link rel="manifest" href="/static/manifest.json">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-    </head>
 
-    <body>
-        
-        <!-- <p class="title">~ camover ~</p> -->
-        
-        <div class="stream">
-            <img id="stream-id" src="/video_feed">
-            <div class="global_actions">
-                <div class="header">
-                    <div class="data">
-                        <span class="text1" id="battery-level">00.00V</span>
-                        <span class="text1" id="cpu-temp">00°C</span>
-                    </div>
-                    <button class="button" id="fullscreen">
-                        <img class="button-img" src="/static/data/fullscreen2.png">
-                    </button>
+<head>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="manifest" href="/static/manifest.json">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+</head>
+
+<body>
+
+    <!-- <p class="title">~ camover ~</p> -->
+
+    <div class="stream">
+        <img id="stream-id" src="/video_feed">
+        <div class="global_actions">
+            <div class="header">
+                <div class="data">
+                    <span class="text1" id="battery-level">00.00V</span>
+                    <span class="text1" id="cpu-temp">00°C</span>
                 </div>
-                <div class="buttons-bottom">
-                    <div class="button-rot">
-                        <div class="buttons-turn">
-                            <button class="button" id="turn_left">
-                                <img class="button-img" src="/static/data/turn_left.png">
-                            </button>
-                            <button class="button" id="turn_right">
-                                <img class="button-img" src="/static/data/turn_right.png">
-                            </button>
-                        </div>
-                        <div class="buttons-fast-turn">
-                            <button class="button" id="fast_turn_left">
-                                <img class="button-img" src="/static/data/fast_turn_left.png">
-                            </button>
-                            <button class="button" id="fast_turn_right">
-                                <img class="button-img" src="/static/data/fast_turn_right.png">
-                            </button> 
-                        </div>
+                <button class="button" id="fullscreen">
+                    <img class="button-img" src="/static/data/fullscreen2.png">
+                </button>
+            </div>
+            <div class="buttons-bottom">
+                <div class="button-rot">
+                    <div class="buttons-turn">
+                        <button class="button" id="turn_left">
+                            <img class="button-img" src="/static/data/turn_left.png">
+                        </button>
+                        <button class="button" id="turn_right">
+                            <img class="button-img" src="/static/data/turn_right.png">
+                        </button>
                     </div>
-                    <div class="buttons-main">
+                    <div class="buttons-fast-turn">
+                        <button class="button" id="fast_turn_left">
+                            <img class="button-img" src="/static/data/fast_turn_left.png">
+                        </button>
+                        <button class="button" id="fast_turn_right">
+                            <img class="button-img" src="/static/data/fast_turn_right.png">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="buttons-main">
+                    <div class="global-controller">
                         <button class="button" id="buzzer">
                             <img class="button-img" src="/static/data/buzzer.png">
-                        </button>   
+                        </button>
                         <button class="button" id="backward">
                             <img class="button-img" src="/static/data/backward.png">
                         </button>
                         <button class="button" id="forward">
                             <img class="button-img" src="/static/data/forward.png">
-                        </button>  
+                        </button>
                     </div>
-              
-                </div>                   
+                    <div class="speed-controller">
+                        <button class="button" id="speed-down">
+                            <img class="button-img-tiny" src="/static/data/speed-down.png">
+                        </button>
+                        <span class="text1" id="speed-display">1.00</span>
+                        <button class="button" id="speed-up">
+                            <img class="button-img-tiny" src="/static/data/speed-up.png">
+                        </button>
+                    </div>
+                </div>
 
             </div>
 
         </div>
 
-        <script src="/static/app.js" charset="utf-8"></script>
+    </div>
 
-    </body>
+    <script src="/static/app.js" charset="utf-8"></script>
+
+</body>
+
 </html>
-
