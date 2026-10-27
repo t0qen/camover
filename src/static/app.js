@@ -21,6 +21,7 @@ const gain_display = document.getElementById('gain-display');
 const exposure_display = document.getElementById('exposure-display');
 const battery_level = document.getElementById('battery-level');
 const cpu_temp = document.getElementById('cpu-temp');
+const connected_clients = document.getElementById('connected-clients-display');
 
 speed_display.textContent = "speed";
 gain_display.textContent = "gain";
@@ -45,6 +46,14 @@ exposure_slider.addEventListener('input', () => {
     clearTimeout(exposure_timer);
     exposure_timer = setTimeout(() => fetch(`/exposure/${global_exposure}`), 100);
 });
+
+setInterval(() => {
+    fetch('/clients')
+        .then(r => r.text())
+        .then(count => {
+            connected_clients.textContent = "people: " + count;
+        });
+}, 2000);
 
 // battery refresh
 setInterval(function () {

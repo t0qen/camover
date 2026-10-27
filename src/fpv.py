@@ -1,6 +1,6 @@
 from flask import Flask, Response, render_template, request
 from signal import pause
-from threading import Thread
+from threading import Thread, Lock
 from ntfy import send_notif
 import cv2 
 import time
@@ -11,13 +11,23 @@ current_speed = 1
 current_gain = 10.0
 current_exposure = 3000
 
+connected_clients = 0
+connected_clients_lock = Lock()
+
 def generate_frames(robot):
-    while True:
-        frame = robot.camera_frame()
-        ret, buffer = cv2.imencode('.jpg', frame)
-        frame_bytes = buffer.tobytes()
-        yield (b'--frame\r\n'
-            b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+    global connected_clients
+    with connected_clients_lock:
+        connected_clients += 1
+    try:
+        while True:
+            frame = robot.camera_frame()
+            ret, buffer = cv2.imencode('.jpg', frame)
+            frame_bytes = buffer.tobytes()
+            yield (b'--frame\r\n'
+                b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+    finally:
+        with connected_clients_lock:
+            connected_clients -= 1
 
 
 def start_fpv(robot):
@@ -54,6 +64,11 @@ def start_fpv(robot):
     def exposure(exposure):
         robot.set_camera_exposure(float(exposure))
         return "[fpv.py] new exposure set"
+
+    @app.route('/clients')
+    def connected_clients():
+        global connected_clients
+        return str(connected_clients)
 
     @app.route('/battery')
     def battery():
