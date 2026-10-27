@@ -70,7 +70,8 @@ flowchart TB
 
 ### 📷️ Previews
 <img width="5152" height="3864" alt="IMG_0025" src="https://github.com/user-attachments/assets/337c779a-019d-43ed-9b76-44e2b601b310" />
-<img width="1394" height="927" alt="image" src="https://github.com/user-attachments/assets/667d782d-36e7-4488-b1c4-eb0f935dc07f" />
+<img width="1383" height="902" alt="image" src="https://github.com/user-attachments/assets/eefe973e-66bc-475d-9c42-0e6475f6aa19" />
+
 Photo from the very beginning of the project
 <img width="970" height="821" alt="image" src="https://github.com/user-attachments/assets/76c3df07-b2ad-4f4b-862f-0c821da5622b" />
 
