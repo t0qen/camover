@@ -57,7 +57,7 @@ echo
 echo "2) setup developpement environnement"
 echo
 echo "- mount pi storage to pc"
-sshfs pi@192.168.1.37:/home/pi/camover /media/dev/PROJECTS/camover/src &
+sshfs pi@192.168.1.37:/home/pi/camover /run/media/dev/PROJECTS/camover/src &
 echo
 # echo "- open folder in vscode"
 # code /media/aymeric/PROJECTS/camover &

@@ -29,8 +29,8 @@ class Robot:
         self.camera.start()
         self.camera.set_controls({
             "AeEnable": False,
-            "ExposureTime": 3000,   # 3 ms
-            "AnalogueGain": 6.0
+            "ExposureTime": 3000,
+            "AnalogueGain": 10.0
         })
 
         # others
