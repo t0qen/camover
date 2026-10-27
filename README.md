@@ -28,6 +28,17 @@ flowchart TB
     E --> B
     E --> F[Camera]
 ```
+**Components**
+- camera 8 Mpx IMX219 B0390 
+- motor controller MDD3A
+- convertissor DC-DC 60 W DFR1025 
+- Raspberry Pi Zero 2 W
+- motors come from this [kit](https://www.dfrobot.com/product-1837.html)
+- capacitors for stabilisation and filtering
+- XIAO esp32c3
+- standard relay
+- 11.1V 2200mAh 25C lithium battery
+- other random and cheap components like leds, etc
 
 ### 📜️ Software
 
