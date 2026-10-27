@@ -6,7 +6,7 @@ CAMOVER, for *camera-rover*.
 </div>
 
 ----
-### Features
+### ✅️ Features
 - based on a RPI Zero 2 W
 - remotly controlled via any connected device any where on the world via a simple website
 - simple controls : turn left/right, forward, backward, speed, etc
@@ -18,7 +18,7 @@ CAMOVER, for *camera-rover*.
 - (planned) make it autonomous with self hosted ia/simple machine learning
 - (planned) better power management, with notifications
 
-### Hardware
+### 🔌️ Hardware
 ```mermaid
 flowchart TB
     A[Battery] --> B[Motor Controller]
@@ -29,7 +29,7 @@ flowchart TB
     E --> F[Camera]
 ```
 
-### Software
+### 📜️ Software
 
 
 **Raspberry Zero**
@@ -57,6 +57,6 @@ flowchart TB
     B --> E[sends battery level to RPI]
 ```
 
-### Previews
+### 📷️ Previews
 <img width="5152" height="3864" alt="IMG_0025" src="https://github.com/user-attachments/assets/337c779a-019d-43ed-9b76-44e2b601b310" />
 <img width="1394" height="927" alt="image" src="https://github.com/user-attachments/assets/667d782d-36e7-4488-b1c4-eb0f935dc07f" />
