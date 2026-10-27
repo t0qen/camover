@@ -8,6 +8,8 @@ import time
 app = Flask(__name__)
 
 current_speed = 1
+current_gain = 10.0
+current_exposure = 3000
 
 def generate_frames(robot):
     while True:
@@ -42,6 +44,16 @@ def start_fpv(robot):
         current_speed = float(speed)
         print(f"[fpv.py] global speed : {current_speed}")
         return f"[fpv.py] global speed : {current_speed}"
+
+    @app.route('/gain/<gain>')
+    def gain(gain):
+        robot.set_camera_gain(float(gain))
+        return "[fpv.py] new gain set"
+
+    @app.route('/exposure/<exposure>')
+    def exposure(exposure):
+        robot.set_camera_exposure(float(exposure))
+        return "[fpv.py] new exposure set"
 
     @app.route('/battery')
     def battery():

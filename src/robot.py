@@ -44,7 +44,7 @@ class Robot:
         self.mot1b.value = m1b
         self.mot2a.value = m2a
         self.mot2b.value = m2b
-        
+
     # def _camera_loop(self):
     #     while self.camera_running:
     #         frame = self.camera.capture_array()
@@ -60,7 +60,20 @@ class Robot:
         frame = self.camera.capture_array()
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         frame = cv2.flip(frame, -1)
-        return frame       
+        return frame
+
+    def set_camera_gain(self, value):
+        print(value)
+        if value < 50.0 and value > 1.0:
+            print(value)
+            self.camera.set_controls({"AnalogueGain": float(value)})
+
+    def set_camera_exposure(self, value):
+        try:
+            print(value)
+            self.camera.set_controls({"ExposureTime": int(value)})
+        except Exception as e:
+            print(f"[robot.py] set_exposure error: {e}")
 
     def bip(self, state, tone=0.5):
         if state:

@@ -5,32 +5,56 @@ let last_command = "";
 let last_buzzer_state = false;
 let is_fullscreen = false
 let global_speed = 1;
+let global_gain = 10.0;
+let global_exposure = 3000;
 
 document.addEventListener("keydown", keyDownHandler);
 document.addEventListener("keyup", keyUpHandler);
 setInterval(main, 100);
 document.documentElement.requestFullscreen();
 
-const slider = document.getElementById('speed-slider');
+const speed_slider = document.getElementById('speed-slider');
+const gain_slider = document.getElementById('gain-slider');
+const exposure_slider = document.getElementById('exposure-slider');
 const speed_display = document.getElementById('speed-display');
+const gain_display = document.getElementById('gain-display');
+const exposure_display = document.getElementById('exposure-display');
 const battery_level = document.getElementById('battery-level');
 const cpu_temp = document.getElementById('cpu-temp');
 
-slider.addEventListener('input', () => {
-    global_speed = parseFloat(slider.value);
+speed_display.textContent = "speed";
+gain_display.textContent = "gain";
+exposure_display.textContent = "exposure";
+
+speed_slider.addEventListener('input', () => {
+    global_speed = parseFloat(speed_slider.value);
     speed_display.textContent = global_speed.toFixed(2);
     fetch(`/speed/${global_speed}`);
 });
+let gain_timer;
+gain_slider.addEventListener('input', () => {
+    global_gain = parseFloat(gain_slider.value);
+    gain_display.textContent = global_gain.toFixed(2);
+    clearTimeout(gain_timer);
+    gain_timer = setTimeout(() => fetch(`/gain/${global_gain}`), 80);
+});
+let exposure_timer;
+exposure_slider.addEventListener('input', () => {
+    global_exposure = parseFloat(exposure_slider.value);
+    exposure_display.textContent = global_exposure.toFixed(0);
+    clearTimeout(exposure_timer);
+    exposure_timer = setTimeout(() => fetch(`/exposure/${global_exposure}`), 100);
+});
 
 // battery refresh
-requestAnimationFrame(function () {
+setInterval(function () {
     fetch('/battery')
         .then(response => response.text())
         .then(level => {
             battery_level.textContent = `${level}V`;
         });
 }, 5000);
-requestAnimationFrame(() => {
+setInterval(() => {
     fetch('/cpu_temp')
         .then(response => response.text())
         .then(temp => {
