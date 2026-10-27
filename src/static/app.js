@@ -11,16 +11,26 @@ document.addEventListener("keyup", keyUpHandler);
 setInterval(main, 100);
 document.documentElement.requestFullscreen();
 
+const slider = document.getElementById('speed-slider');
+const speed_display = document.getElementById('speed-display');
+const battery_level = document.getElementById('battery-level');
+const cpu_temp = document.getElementById('cpu-temp');
+
+slider.addEventListener('input', () => {
+    global_speed = parseFloat(slider.value);
+    speed_display.textContent = global_speed.toFixed(2);
+    fetch(`/speed/${global_speed}`);
+});
 
 // battery refresh
-setInterval(function () {
+requestAnimationFrame(function () {
     fetch('/battery')
         .then(response => response.text())
         .then(level => {
-            document.getElementById('battery-level').textContent = `${level}V`;
+            battery_level.textContent = `${level}V`;
         });
 }, 5000);
-setInterval(() => {
+requestAnimationFrame(() => {
     fetch('/cpu_temp')
         .then(response => response.text())
         .then(temp => {
@@ -39,8 +49,6 @@ function main() {
     else if (keys["a"] || button["turn_left"]) command = "turn_left";
     else if (keys["d"] || button["turn_right"]) command = "turn_right";
     else if (keys["s"] || button["backward"]) command = "backward";
-    else if (keys["-"] || button["speed-down"]) command = "speed-down";
-    else if (keys["+"] || button["speed-up"]) command = "speed-up";
     else if (keys[" "] || button["buzzer"]) command = "buzzer";
     //     if (!last_buzzer_state) {
     //         fetch(`/buzzer`);
@@ -62,23 +70,7 @@ function send_command(command) {
 
     if (command != last_command) {
         last_command = command;
-        if (command == "speed-up") {
-            console.log("speed up");
-            global_speed = Number((global_speed + 0.05).toFixed(2));
-            if (global_speed > 1) {
-                global_speed = 1;
-            }
-            document.getElementById('speed-display').textContent = global_speed.toFixed(2);
-            fetch(`/speed/${global_speed}`)
-        } else if (command == "speed-down") {
-            console.log("speed down");
-            global_speed = Number((global_speed - 0.05).toFixed(2));
-            if (global_speed < 0.4) {
-                global_speed = 0.4;
-            }
-            document.getElementById('speed-display').textContent = global_speed.toFixed(2);
-            fetch(`/speed/${global_speed}`)
-        } else if (command == "buzzer") {
+        if (command == "buzzer") {
             fetch(`/buzzer`);
         } else {
             fetch(`/control/${command}`);
@@ -221,27 +213,3 @@ document.getElementById("buzzer").addEventListener("pointercancel", () => {
     button["buzzer"] = false;
 });
 
-
-document.getElementById("speed-down").addEventListener("pointerdown", () => {
-    button["speed-down"] = true;
-});
-
-document.getElementById("speed-down").addEventListener("pointerup", () => {
-    button["speed-down"] = false;
-});
-
-document.getElementById("speed-down").addEventListener("pointercancel", () => {
-    button["speed-down"] = false;
-});
-
-document.getElementById("speed-up").addEventListener("pointerdown", () => {
-    button["speed-up"] = true;
-});
-
-document.getElementById("speed-up").addEventListener("pointerup", () => {
-    button["speed-up"] = false;
-});
-
-document.getElementById("speed-up").addEventListener("pointercancel", () => {
-    button["speed-up"] = false;
-});
