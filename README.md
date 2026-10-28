@@ -32,9 +32,10 @@ A tiny **tracked robot** remotly controllable from **anywhere** in the world thr
 - power management from a tiny micro-controller (XIAO esp32c3) : remtly shutdown or powerup the RPI via home assistant
 - realtime battery usage viewer via the XIAO
 - (planned) use game controller such as steering wheel
-- (planned) see how many people are connected to the website
+- see how many people are connected to the website in the same time
+- (planned) being able to control more accuratly the robot while several peoples are connected together
 - (planned) make it autonomous with self hosted ia/simple machine learning
-- (planned) better power management, with notifications
+- power management, with notifications and emergency shutdown
 
 ### 🔌️ Hardware
 ```mermaid
