@@ -74,8 +74,9 @@ flowchart TB
     A[**main.py** : auto start at boot] --> B[fpv.py]
     A --> C[autonomous.py]
     B --> F[runs the website with html/js/css]
-    F --> G[**cloudflared**]
-    G -.-> H[The Web]
+    F --> G[auth]
+    G --> H[**cloudflared**]
+    I -.-> J[The Web]
 ```
 
 **XIAO esp32c3**
