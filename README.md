@@ -6,6 +6,24 @@ CAMOVER, for *camera-rover*.
 </div>
 
 ----
+
+<div align="center">
+    
+A tiny **tracked robot** remotly controllable from **anywhere** in the world throught an easy-to-use website.
+
+</div>
+
+
+> [!TIP]
+> Try it **yourself** : https://camover.lostpacket.org
+>
+> The user is *demo* and the password often changes, to prevent too much people for being connected at same time.
+>
+> Ask me (discord: t0qen) to try it ! Or wait for global tests.
+>
+
+
+
 ### ✅️ Features
 - based on a RPI Zero 2 W
 - remotly controlled via any connected device any where on the world via a simple website
